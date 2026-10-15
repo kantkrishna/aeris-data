@@ -32,7 +32,6 @@ setup:
 	echo "# Risk Register\n## Risk\n## Impact\n## Mitigation" > docs/operating_model/risk_register.md
 
 clean:
-	rm -rf .venv .pytest_cache .mypy_cache .coverage
-	find . -type d -name "__pycache__" -exec rm -rf {} +
+	python -c "import shutil, os; [shutil.rmtree(d, ignore_errors=True) for d in ['.venv', '.pytest_cache', '.mypy_cache']]; os.remove('.coverage') if os.path.exists('.coverage') else None"
 
 all: install lint security test setup

@@ -3,7 +3,7 @@
 Abstract Execution Layer.
 
 Provides polymorphic engine execution. Handles routing of data workloads
-to the appropriate compute engine while abstracting connectivity and 
+to the appropriate compute engine while abstracting connectivity and
 authentication logic from the caller.
 
 Classes:
@@ -11,29 +11,36 @@ Classes:
     SnowflakeExecutor: Concrete implementation for Snowflake.
     DatabricksExecutor: Concrete implementation for Databricks.
 """
+
 from abc import ABC, abstractmethod
-from typing import Dict, Any, Optional
+from typing import Dict, Optional
+
 
 class UnsupportedEngineException(Exception):
     pass
 
+
 class MalformedWorkloadException(Exception):
     pass
+
 
 class BaseExecutor(ABC):
     @abstractmethod
     def execute(self, payload: str) -> Dict[str, str]:
         pass
 
+
 class SnowflakeExecutor(BaseExecutor):
     def execute(self, payload: str) -> Dict[str, str]:
         # Implementation interacts with snowflake.connector
         return {"status": "success", "engine_used": "snowflake"}
 
+
 class DatabricksExecutor(BaseExecutor):
     def execute(self, payload: str) -> Dict[str, str]:
         # Implementation interacts with databricks-sdk
         return {"status": "success", "engine_used": "databricks"}
+
 
 class ExecuteWorkload:
     def __init__(self, engine: str, payload: Optional[str]):

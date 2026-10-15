@@ -4,12 +4,14 @@ Unified Health Metrics API Tests.
 
 Validates US-16.2 API endpoints returning unified status from both engines.
 """
+
 from fastapi.testclient import TestClient
 from src.observability.api import app
 
 import pytest
 
 client = TestClient(app)
+
 
 def test_unified_health_metrics() -> None:
     """Validates 200 OK and combined payload structure."""
@@ -20,6 +22,7 @@ def test_unified_health_metrics() -> None:
     assert "databricks" in data
     assert data["snowflake"]["status"] == "healthy"
     assert data["databricks"]["status"] == "healthy"
+
 
 def test_partial_degradation(monkeypatch: pytest.MonkeyPatch) -> None:
     """Validates 206 Partial Content when one engine API times out."""

@@ -5,8 +5,11 @@ description = "AERIS V1 Platform Foundation"
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
+    "databricks-sdk>=0.142.0",
     "fastapi>=0.141.1",
     "httpx>=0.28.1",
+    "python-dotenv>=1.2.3",
+    "snowflake-connector-python>=4.7.5",
 ]
 
 [project.optional-dependencies]
@@ -48,8 +51,11 @@ pythonpath = ["."]
 
 [dependency-groups]
 dev = [
+    "mypy>=2.3.1",
     "pandas>=2.3.3",
     "pandas-stubs>=2.3.3.260113",
     "pytest>=9.1.1",
+    "pytest-asyncio>=1.4.0",
     "pytest-cov>=7.1.0",
+    "pytest-mock>=3.15.1",
 ]
